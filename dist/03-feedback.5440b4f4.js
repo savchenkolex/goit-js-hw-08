@@ -510,7 +510,10 @@ const STORAGE_KEY = "feedback-form-state";
 const formEl = document.querySelector(".feedback-form");
 formEl.addEventListener("input", (0, _lodashThrottleDefault.default)(formElHandler, 500));
 formEl.addEventListener("submit", formSubmit);
-let formStateObj = {};
+let formStateObj = {
+    email: "",
+    message: ""
+};
 const localFormState = localStorage.getItem(STORAGE_KEY);
 if (localFormState) {
     formStateObj = JSON.parse(localFormState);
@@ -530,10 +533,13 @@ function formElHandler(event) {
 function formSubmit(event) {
     event.preventDefault();
     const elements = event.target.elements;
-    console.log(elements.email.value);
-    console.log(elements.message.value);
+    if (!elements.email.value || !elements.message.value) return alert("\u0417\u0430\u043F\u043E\u0432\u043D\u0438 \u0432\u0441\u0456 \u043F\u043E\u043B\u044F \u0444\u043E\u0440\u043C\u0438 \u043F\u0435\u0440\u0448 \u043D\u0456\u0436 \u043D\u0430\u0434\u0441\u0438\u043B\u0430\u0442\u0438! \u041D\u0435\u0433\u0430\u0439\u043D\u043E!");
+    console.log({
+        emali: elements.email.value,
+        message: elements.message.value
+    });
     event.target.reset();
-    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    // console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
     localStorage.clear(STORAGE_KEY);
 }
 

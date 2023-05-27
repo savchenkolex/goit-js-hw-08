@@ -5,7 +5,10 @@ const formEl = document.querySelector(".feedback-form");
 formEl.addEventListener("input",throttle(formElHandler,500));
 formEl.addEventListener("submit", formSubmit);
 
-let formStateObj = {};
+let formStateObj = {
+    email: "",
+    message: "",
+};
 
 const localFormState = localStorage.getItem(STORAGE_KEY);
 
@@ -31,12 +34,18 @@ function formElHandler(event){
 
 function formSubmit(event) {
     event.preventDefault();
-
     const elements = event.target.elements;
-    console.log(elements.email.value);
-    console.log(elements.message.value);
+
+    if (!elements.email.value || !elements.message.value) {
+        return alert("Заповни всі поля форми перш ніж надсилати! Негайно!");
+    }
+
+    console.log({
+        emali: elements.email.value,
+        message: elements.message.value,
+    });
     
     event.target.reset();
-    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    // console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
     localStorage.clear(STORAGE_KEY);
 }

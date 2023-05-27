@@ -513,11 +513,9 @@ const iframePlayer = new Vimeo.Player(iframeEl);
 function saveCurrentTime({ seconds  }) {
     localStorage.setItem("videoplayer-current-time", seconds);
 }
-function setSavedTime() {
-    return Number(localStorage.getItem("videoplayer-current-time"));
-}
-iframePlayer.on("timeupdate", (0, _lodashThrottleDefault.default)(saveCurrentTime, 900));
-iframePlayer.setCurrentTime(setSavedTime());
+const SavedTime = Number(localStorage.getItem("videoplayer-current-time"));
+iframePlayer.on("timeupdate", (0, _lodashThrottleDefault.default)(saveCurrentTime, 1000));
+iframePlayer.setCurrentTime(SavedTime);
 
 },{"lodash.throttle":"bGJVT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@vimeo/player":"kmmUG"}],"bGJVT":[function(require,module,exports) {
 var global = arguments[3];

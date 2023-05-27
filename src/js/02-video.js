@@ -8,9 +8,7 @@ function saveCurrentTime({seconds}){
     localStorage.setItem("videoplayer-current-time",seconds);
 }
 
-function setSavedTime(){
-    return Number(localStorage.getItem("videoplayer-current-time"));
-}
-
-iframePlayer.on("timeupdate",throttle(saveCurrentTime,900));
-iframePlayer.setCurrentTime(setSavedTime());
+const SavedTime = Number(localStorage.getItem("videoplayer-current-time"));
+ 
+iframePlayer.on("timeupdate",throttle(saveCurrentTime,1000));
+iframePlayer.setCurrentTime(SavedTime);
